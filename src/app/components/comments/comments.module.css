@@ -25,11 +25,11 @@
   }
   .input::placeholder
   {
-    color: teal;
+    color: grey;
   }
   .button {
     padding: 16px 20px;
-    background-color: teal;
+    background-color: black;
     color: white;
     font-weight: bold;
     border: none;
