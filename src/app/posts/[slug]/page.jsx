@@ -4,7 +4,8 @@ import Image from "next/image";
 import Comments from "@/app/components/comments/Comments";
 
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+  const apiUrl = `https://blog-jash-vista.vercel.app/api/posts/${slug}`; // Replace with your Vercel project URL
+  const res = await fetch(apiUrl, {
     cache: "no-store",
   });
 
@@ -50,7 +51,7 @@ const SinglePage = async ({ params }) => {
             dangerouslySetInnerHTML={{ __html: data?.desc }}
           />
           <div className={styles.comment}>
-            <Comments postSlug={slug}/>
+            <Comments postSlug={slug} />
           </div>
         </div>
         <Menu />

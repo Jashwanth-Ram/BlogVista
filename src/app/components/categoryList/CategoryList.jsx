@@ -4,7 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  const apiUrl = "https://blog-jash-vista.vercel.app/api/categories";
+
+  const res = await fetch(apiUrl, {
     cache: "no-store",
   });
 
@@ -23,8 +25,8 @@ const CategoryList = async () => {
       <div className={styles.categories}>
         {data?.map((item) => (
           <Link
-          href={`/blog?cat=${item.slug}`}
-          className={`${styles.category} ${styles[item.slug]}`}
+            href={`/blog?cat=${item.slug}`}
+            className={`${styles.category} ${styles[item.slug]}`}
             key={item._id}
           >
             {item.img && (
