@@ -22,10 +22,10 @@ const LoginPage = () => {
     <div className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.socialButton} onClick={()=>signIn("google")}>SignIn with Google<span className={styles.span}>
-                    <Image src="/goggle.png" width={20} height={20}/>
+                    <Image src="/goggle.png" alt="" width={20} height={20}/>
                     </span></div>
                     <div className={styles.socialButton} onClick={()=>signIn("github")}>SignIn with Github<span className={styles.span}>
-                    <Image src="/github.png" width={20} height={20}/>
+                    <Image src="/github.png" alt="" width={20} height={20}/>
                     </span></div>      
             </div>
         </div>

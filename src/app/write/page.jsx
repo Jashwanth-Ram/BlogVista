@@ -2,15 +2,16 @@
 import React, { useEffect } from "react";
 import styles from "./writePage.module.css";
 import Image from "next/image";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "@/utils/firebase";
+import dynamic from "next/dynamic";
 const WritePage = () => {
   const { status } = useSession();
+  const ReactQuill = dynamic(()=> import('react-quill'),{ssr:false});
   const router = useRouter();
 
   const [open, setOpen] = useState(false);

@@ -9,10 +9,10 @@ const Footer = ()=>
             <div className={styles.info}>
                 <div className={styles.logo}>
 
-                    <Image className={styles.img}src="/jr1.png" width={50} height={50}/>
+                    <Image className={styles.img}src="/jr1.png" alt="" width={50} height={50}/>
                     <h1 className={styles.logoText}>Jashwanth Ram</h1>
                 </div>
-                <p className={styles.desc}>Combination of Next.js and React, my latest blog app  with a sleek and intuitive design. As a fellow web developer, I've tailored every aspect to enhance the writing and reading experience, making it a must-have tool for anyone in the digital content space. Elevate your blogging journey with <span className={styles.vista}>BlogVista </span> .</p>
+                <p className={styles.desc}>Combination of Next.js and React, my latest blog app  with a sleek and intuitive design. As a fellow web developer, I have  tailored every aspect to enhance the writing and reading experience, making it a must-have tool for anyone in the digital content space. Elevate your blogging journey with <span className={styles.vista}>BlogVista </span> .</p>
 
                 <div className={styles.icons}>
           <Image src="/facebook.png" alt="" width={18} height={18} />
