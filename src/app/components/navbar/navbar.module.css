@@ -7,7 +7,7 @@
 
 .social {
   display: flex;
- 
+   visibility: hidden;
   gap: 10px;
   flex: 1;
 }
