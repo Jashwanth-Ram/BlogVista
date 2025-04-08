@@ -16,7 +16,7 @@ const Featured = () => {
 
 
 
-          <h1 className={styles.postTitle}> BlogVista - Your space to Write , Post and Comment !!</h1>
+            <h1 className={styles.postTitle}> BlogVista - Your space to Write, Post and Comment.</h1>
           <p className={styles.postDesc}>
           Blog your way using BlogVista! Share your thoughts, upload images, and join the conversation with comments. A  simple platform for expressing  your thoughts.
           </p>
