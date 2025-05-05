@@ -100,53 +100,54 @@ const WritePage = () => {
 
   return (
     <div className={styles.container}>
-      <form className={styles.wrapper} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          className={styles.input}
-          required
-        />
-        {/* Category Dropdown */}
-        <select
-          value={catSlug}
-          onChange={e => setCatSlug(e.target.value)}
-          className={styles.select}
-          required
-        >
-          <option value="">Select Category</option>
-          {categories &&
-            categories.map((cat) => (
-              <option key={cat.slug} value={cat.slug}>
-                {cat.title}
-              </option>
-            ))}
-        </select>
-        {/* File Upload */}
-        <input
-          type="file"
-          onChange={e => setFile(e.target.files[0])}
-          className={styles.input}
-        />
-        {media && (
-          <Image src={media} alt="Uploaded" width={16} height={16} />
+      <input
+        type="text"
+        placeholder="Title"
+        className={styles.input}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+        <option value="style">style</option>
+        <option value="fashion">fashion</option>
+        <option value="food">food</option>
+        <option value="culture">culture</option>
+        <option value="travel">travel</option>
+        <option value="coding">coding</option>
+      </select>
+      <div className={styles.editor}>
+        <button className={styles.button} onClick={() => setOpen(!open)}>
+          <Image src="/plus.png" alt="" width={16} height={16} />
+        </button>
+        {open && (
+          <div className={styles.add}>
+            <input
+              type="file"
+              id="image"
+              onChange={(e) => setFile(e.target.files[0])}
+              style={{ display: "none" }}
+            />
+            <button className={styles.addButton}>
+              <label htmlFor="image">
+                <Image src="/image.png" alt="" width={16} height={16} />
+              </label>
+            </button>
+            
+          </div>
         )}
-        {/* Rich Text Editor */}
         <ReactQuill
+          className={styles.textArea}
+          theme="bubble"
           value={value}
           onChange={setValue}
-          theme="bubble" // or "snow"
-          placeholder="Write your blog post here..."
+          placeholder="Tell your story..."
         />
-        {/* Submit Button */}
-        <button type="submit" className={styles.publish} disabled={loading}>
-          {loading ? "Posting..." : "Publish"}
-        </button>
-      </form>
+      </div>
+      <button className={styles.publish} onClick={handleSubmit}>
+        Publish
+      </button>
     </div>
   );
+
 };
 
 export default WritePage;
