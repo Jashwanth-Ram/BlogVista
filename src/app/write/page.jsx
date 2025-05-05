@@ -1,46 +1,27 @@
-"use client";
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
+"use client"
+import React, { useEffect } from "react";
 import styles from "./writePage.module.css";
 import Image from "next/image";
+import "react-quill/dist/quill.bubble.css";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import useSWR from "swr";
-
-// Dynamically import ReactQuill outside the component
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.bubble.css"; // or "quill.snow.css"
-
-// Fetcher for SWR
-const fetcher = async (url) => {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Failed to fetch");
-  return res.json();
-};
-
+import dynamic from "next/dynamic";
 const WritePage = () => {
   const { status } = useSession();
+  const ReactQuill = dynamic(()=> import('react-quill'),{ssr:false});
   const router = useRouter();
 
+  const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
-  const [value, setValue] = useState(""); // Controlled value for ReactQuill
+  const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
-  const [mounted, setMounted] = useState(false); // For SSR hydration
-  const [loading, setLoading] = useState(false);
-
-  // Fetch categories for dropdown
-  const { data: categories, error: catError } = useSWR("/api/categories", fetcher);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!file) return;
     const storage = getStorage(app);
     const upload = () => {
       const name = new Date().getTime() + file.name;
@@ -51,7 +32,17 @@ const WritePage = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Optional: handle progress
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
         },
         (error) => {},
         () => {
@@ -62,41 +53,42 @@ const WritePage = () => {
       );
     };
 
-    upload();
+    file && upload();
   }, [file]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    // Prepare post data
-    const postData = {
-      title,
-      desc: value,
-      catSlug,
-      img: media,
-    };
-
-    try {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(postData),
-      });
-      if (res.ok) {
-        router.push("/");
-      } else {
-        alert("Failed to create post");
-      }
-    } catch (err) {
-      alert("Error submitting post");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (status === "loading" || !mounted) {
+  if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
   }
+
+  if (status === "unauthenticated") {
+    router.push("/");
+  }
+
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const handleSubmit = async () => {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || "style", //If not selected, choose the general category
+      }),
+    });
+
+    if (res.status === 200) {
+      const data = await res.json();
+      router.push(`/posts/${data.slug}`);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -147,7 +139,6 @@ const WritePage = () => {
       </button>
     </div>
   );
-
 };
 
 export default WritePage;
