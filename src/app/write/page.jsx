@@ -113,7 +113,7 @@ const WritePage = () => {
         <select
           value={catSlug}
           onChange={e => setCatSlug(e.target.value)}
-          className={styles.input}
+          className={styles.select}
           required
         >
           <option value="">Select Category</option>
@@ -131,7 +131,7 @@ const WritePage = () => {
           className={styles.input}
         />
         {media && (
-          <Image src={media} alt="Uploaded" width={200} height={200} />
+          <Image src={media} alt="Uploaded" width={16} height={16} />
         )}
         {/* Rich Text Editor */}
         <ReactQuill
