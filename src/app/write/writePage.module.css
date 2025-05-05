@@ -60,7 +60,9 @@
   
   .textArea {
     width: 100%;
-     margin-top: 25px;
+
+      /*change : */
+     margin-top: 30px;
 
   }
   
