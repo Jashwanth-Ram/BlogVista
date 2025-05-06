@@ -47,15 +47,25 @@ export const POST = async (req) => {
 
   try {
     const body = await req.json();
+    console.log("Creating post with data:", body);
+
     const post = await prisma.post.create({
-      data: { ...body, userEmail: session.user.email },
+      data: { 
+        ...body, 
+        userEmail: session.user.email,
+        createdAt: new Date(),
+      },
     });
 
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    console.log("Post created successfully:", post);
+    return new NextResponse(JSON.stringify(post), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.error("Error creating post:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ 
+        message: "Failed to create post", 
+        error: err.message 
+      }, { status: 500 })
     );
   }
 };
