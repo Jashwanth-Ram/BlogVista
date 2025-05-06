@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import styles from "./writePage.module.css";
 import Image from "next/image";
 import "react-quill/dist/quill.bubble.css";
@@ -9,9 +9,15 @@ import { useSession } from "next-auth/react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "@/utils/firebase";
 import dynamic from "next/dynamic";
+
+// Move ReactQuill import outside component and disable SSR
+const ReactQuill = dynamic(() => import('react-quill'), { 
+  ssr: false,
+  loading: () => <p>Loading editor...</p>
+});
+
 const WritePage = () => {
   const { status } = useSession();
-  const ReactQuill = dynamic(()=> import('react-quill'),{ssr:false});
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -20,8 +26,22 @@ const WritePage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  // Memoize the editor modules to prevent re-renders
+  const modules = useMemo(() => ({
+    toolbar: false, // Disable toolbar since we're using bubble theme
+    clipboard: {
+      matchVisual: false,
+    },
+  }), []);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!file) return;
     const storage = getStorage(app);
     const upload = () => {
       const name = new Date().getTime() + file.name;
@@ -56,7 +76,7 @@ const WritePage = () => {
     file && upload();
   }, [file]);
 
-  if (status === "loading") {
+  if (status === "loading" || !mounted) {
     return <div className={styles.loading}>Loading...</div>;
   }
 
@@ -74,7 +94,6 @@ const WritePage = () => {
 
   const handleSubmit = async () => {
     try {
-      // Generate a unique slug by adding timestamp
       const uniqueSlug = `${slugify(title)}-${Date.now()}`;
       
       const res = await fetch("/api/posts", {
@@ -137,16 +156,18 @@ const WritePage = () => {
                 <Image src="/image.png" alt="" width={16} height={16} />
               </label>
             </button>
-            
           </div>
         )}
-        <ReactQuill
-          className={styles.textArea}
-          theme="bubble"
-          value={value}
-          onChange={setValue}
-          placeholder="Tell your story..."
-        />
+        {mounted && (
+          <ReactQuill
+            className={styles.textArea}
+            theme="bubble"
+            value={value}
+            onChange={setValue}
+            modules={modules}
+            placeholder="Tell your story..."
+          />
+        )}
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
