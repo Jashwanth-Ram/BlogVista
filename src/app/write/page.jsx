@@ -27,6 +27,7 @@ const WritePage = () => {
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   // Memoize the editor modules to prevent re-renders
   const modules = useMemo(() => ({
@@ -42,6 +43,7 @@ const WritePage = () => {
 
   useEffect(() => {
     if (!file) return;
+    setUploading(true);
     const storage = getStorage(app);
     const upload = () => {
       const name = new Date().getTime() + file.name;
@@ -64,16 +66,20 @@ const WritePage = () => {
               break;
           }
         },
-        (error) => {},
+        (error) => {
+          setUploading(false);
+          alert("Image upload failed!");
+        },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setMedia(downloadURL);
+            setUploading(false);
           });
         }
       );
     };
 
-    file && upload();
+    upload();
   }, [file]);
 
   if (status === "loading" || !mounted) {
@@ -93,6 +99,15 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
+    if (uploading) {
+      alert("Please wait for the image to finish uploading.");
+      return;
+    }
+    // If an image was selected but not uploaded yet
+    if (file && !media) {
+      alert("Please wait for the image to finish uploading.");
+      return;
+    }
     try {
       const uniqueSlug = `${slugify(title)}-${Date.now()}`;
       
@@ -169,8 +184,12 @@ const WritePage = () => {
           />
         )}
       </div>
-      <button className={styles.publish} onClick={handleSubmit}>
-        Publish
+      <button
+        className={styles.publish}
+        onClick={handleSubmit}
+        disabled={uploading}
+      >
+        {uploading ? "Uploading Image..." : "Publish"}
       </button>
     </div>
   );
