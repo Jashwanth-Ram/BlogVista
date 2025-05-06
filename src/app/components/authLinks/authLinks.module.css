@@ -42,7 +42,10 @@
       display: flex;
     }
   
-    .link{
+    .link {
       display: none;
+    }
+    .responsiveMenu .responsiveLink {
+      display: block;
     }
   }
