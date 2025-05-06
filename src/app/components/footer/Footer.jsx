@@ -37,13 +37,7 @@ const Footer = ()=>
           <Link href="/write">Coding</Link>
           <Link href="/write">Travel</Link>
         </div>
-        <div className={styles.list}>
-          <span className={styles.listTitle}>Social</span>
-          <Link href="/">Facebook</Link>
-          <Link href="/">Instagram</Link>
-          <Link href="/">Tiktok</Link>
-          <Link href="/">Youtube</Link>
-        </div>
+   
             </div>
         </div>
     )
