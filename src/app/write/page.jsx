@@ -68,7 +68,8 @@ const WritePage = () => {
         },
         (error) => {
           setUploading(false);
-          alert("Image upload failed!");
+          console.error("Firebase image upload error:", error);
+          alert("Image upload failed: " + error.message);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
