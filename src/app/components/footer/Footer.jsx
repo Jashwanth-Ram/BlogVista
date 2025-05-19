@@ -12,13 +12,11 @@ const Footer = ()=>
                     <Image className={styles.img}src="/jr1.png" alt="" width={50} height={50}/>
                     <h1 className={styles.logoText}>Jashwanth Ram</h1>
                 </div>
-                <p className={styles.desc}>Combination of Next.js and React, my latest blog app  with the sleek and intuitive design. As a fellow web developer, I have  tailored every aspect to enhance the writing and reading experience, making it a must-have tool for anyone in the digital content space. Elevate your blogging journey with <span className={styles.vista}>BlogVista </span> .</p>
+                <p className={styles.desc}>
+                       Elevate your blogging journey with <span className={styles.vista}>BlogVista 
+                        </span>.</p>
 
-                <div className={styles.icons}>
-          <Image src="/facebook.png" alt="" width={18} height={18} />
-          <Image src="/instagram.png" alt="" width={18} height={18} />
-          <Image src="/youtube.png" alt="" width={18} height={18} />
-        </div>
+               
 
             </div>
             <div className={styles.links}>
@@ -26,7 +24,7 @@ const Footer = ()=>
             <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
           <Link href="/">Homepage</Link>
-          <Link href="/">Blog</Link>
+          <Link href="/">About</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Tags</span>
@@ -35,7 +33,7 @@ const Footer = ()=>
           <Link href="/write">Coding</Link>
           <Link href="/write">Travel</Link>
         </div>
-   
+      
             </div>
         </div>
     )
