@@ -10,7 +10,7 @@ const MenuPosts = ({ withImage }) => {
       <Link href="https://blog-jash-vista.vercel.app/posts/western-fashion-1747562977475" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/fashion.jpeg" alt="" fill className={styles.image} />
+            <Image src="/fashion.png" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -28,7 +28,7 @@ const MenuPosts = ({ withImage }) => {
       <Link href="https://blog-jash-vista.vercel.app/posts/pop-culture-1747559295348" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/culture.jpeg" alt="" fill className={styles.image} />
+            <Image src="/culture.png" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -49,7 +49,7 @@ const MenuPosts = ({ withImage }) => {
       <Link href="https://blog-jash-vista.vercel.app/posts/quantum-ai-1747643095057" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/coding.jpeg" alt="" fill className={styles.image} />
+            <Image src="/coding.png" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
@@ -68,7 +68,7 @@ const MenuPosts = ({ withImage }) => {
       <Link href="https://blog-jash-vista.vercel.app/posts/discovering-nyc-1747643856402" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/travel.jpeg" alt="" fill className={styles.image} />
+            <Image src="/travel.png" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
