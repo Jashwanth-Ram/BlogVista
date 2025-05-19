@@ -23,7 +23,7 @@ const MenuPosts = ({ withImage }) => {
           </div>
         </div>
       </Link>
-      <Link href="https://blog-jash-vista.vercel.app/posts/understanding-malware-1747554786874" className={styles.item}>
+      <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
