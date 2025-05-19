@@ -28,7 +28,7 @@ const MenuPosts = ({ withImage }) => {
       <Link href="https://blog-jash-vista.vercel.app/posts/pop-culture-1747559295348" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
-            <Image src="/culture.png" alt="" fill className={styles.image} />
+            <Image src="/popcult.jpg" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
