@@ -6,24 +6,26 @@ import styles from "./menuPosts.module.css"
 const MenuPosts = ({ withImage }) => {
   return (
     <div className={styles.items}>
-      <Link href="/" className={styles.item}>
+
+      <Link href="https://blog-jash-vista.vercel.app/posts/western-fashion-1747562977475" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.travel}`}>Travel</span>
+          <span className={`${styles.category} ${styles.travel}`}>Fashion</span>
           <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
+          Western Fashion</h3>
           <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span className={styles.date}> - 10.03.2023</span>
+            <span className={styles.username}>Sai</span>
+            <span className={styles.date}> - 2025-05-18</span>
           </div>
         </div>
       </Link>
-      <Link href="/" className={styles.item}>
+
+
+      <Link href="https://blog-jash-vista.vercel.app/posts/pop-culture-1747559295348" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
@@ -34,32 +36,36 @@ const MenuPosts = ({ withImage }) => {
             Culture
           </span>
           <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+           Pop Culture
           </h3>
           <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span className={styles.date}> - 10.03.2023</span>
+            <span className={styles.username}>Akash</span>
+            <span className={styles.date}> - 2025-05-18</span>
           </div>
         </div>
       </Link>
-      <Link href="/" className={styles.item}>
+
+
+      <Link href="https://blog-jash-vista.vercel.app/posts/quantum-ai-1747643095057" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
           </div>
         )}
         <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.food}`}>Food</span>
+          <span className={`${styles.category} ${styles.food}`}>Coding</span>
           <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            QuantumAI
           </h3>
           <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span className={styles.date}> - 10.03.2023</span>
+            <span className={styles.username}>Jashwanth Ram</span>
+            <span className={styles.date}> - 2025-05-19  </span>
           </div>
         </div>
       </Link>
-      <Link href="/" className={styles.item}>
+
+
+      <Link href="https://blog-jash-vista.vercel.app/posts/discovering-nyc-1747643856402" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
@@ -67,14 +73,13 @@ const MenuPosts = ({ withImage }) => {
         )}
         <div className={styles.textContainer}>
           <span className={`${styles.category} ${styles.fashion}`}>
-            Fashion
+            Travel
           </span>
           <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
+          Discovering NYC          </h3>
           <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span className={styles.date}> - 10.03.2023</span>
+            <span className={styles.username}>Harish</span>
+            <span className={styles.date}> - 2025-05-19</span>
           </div>
         </div>
       </Link>
